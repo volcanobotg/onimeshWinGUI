@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>OMGUI</class>
+ <widget class="QMainWindow" name="OMGUI">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>943</width>
-    <height>300</height>
+    <width>794</width>
+    <height>350</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,28 +18,28 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>0</y>
-      <width>218</width>
-      <height>221</height>
+      <y>20</y>
+      <width>221</width>
+      <height>241</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="btnSelectFiles">
        <property name="text">
-        <string>Select .ONI Files</string>
+        <string>Select ONI Files</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="btnSelectDir">
        <property name="text">
-        <string>Select output directory</string>
+        <string>Select Output Directory</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_4">
+      <widget class="QPushButton" name="btnLaunch">
        <property name="text">
         <string>Launch OniMesh</string>
        </property>
@@ -47,23 +47,23 @@
      </item>
     </layout>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="labelPrompt">
     <property name="geometry">
      <rect>
       <x>250</x>
-      <y>10</y>
-      <width>681</width>
-      <height>211</height>
+      <y>30</y>
+      <width>521</width>
+      <height>231</height>
      </rect>
     </property>
-    <property name="autoFillBackground">
-     <bool>true</bool>
-    </property>
     <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#000000;&quot;&gt;Welcome To OniMesh!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <string/>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+    </property>
+    <property name="margin">
+     <number>10</number>
     </property>
    </widget>
   </widget>
@@ -72,7 +72,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>943</width>
+     <width>794</width>
      <height>31</height>
     </rect>
    </property>

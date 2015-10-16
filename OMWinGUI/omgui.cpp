@@ -1,5 +1,5 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "omgui.h"
+#include "ui_omgui.h"
 #include <QFileDialog>
 #include <iostream>
 #include <stdlib.h>
@@ -14,32 +14,25 @@ QString dirName, fileName;
 QStringList fileNames;
 QString fileNamesSize, fileNamesStr="";
 
-class Sleeper : public QThread
-{
-public:
-    static void msleep(unsigned long msecs){QThread::msleep(msecs);}
-};
-
-MainWindow::MainWindow(QWidget *parent) :
+OMGUI::OMGUI(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::OMGUI)
 {
     ui->setupUi(this);
 }
 
-MainWindow::~MainWindow()
+OMGUI::~OMGUI()
 {
     delete ui;
 }
 
-void MainWindow::on_pushButton_3_clicked()
+void OMGUI::on_btnSelectFiles_clicked()
 {
-    fileSelected = true;
-    //fileName = QFileDialog::getOpenFileName(this, tr("Select ONI file(s)"), "", tr("ONI Files (*.oni)"));
-    //ui->label->setText("File loaded: " + fileName);
-
+    //Creates the dialog to select different ONI files
     QFileDialog dialog(this);
     fileNames = dialog.getOpenFileNames(this, tr("Select ONI file(s)"), "", tr("ONI Files (*.oni)"));
+
+    //creates a String with the file names and locations for the prompt to show
     QString allFiles = "";
     for (int i = 0; i< fileNames.length(); i++){
         allFiles.append("File selected:" + fileNames.at(i) + " \n");
@@ -47,45 +40,49 @@ void MainWindow::on_pushButton_3_clicked()
     }
     fileNamesStr.remove(fileNamesStr.size());
     fileNamesSize = QString::number(fileNames.size());
-    ui->label->setText(allFiles);
+    ui->labelPrompt->setText(allFiles);
+
+
+    fileSelected = true;
 
 }
 
-void MainWindow::on_pushButton_2_clicked()
+void OMGUI::on_btnSelectDir_clicked()
 {
+    //Creates the dialog to select the directory
     QFileDialog dialog;
     dialog.setFileMode(QFileDialog::Directory);
     dialog.setOption(QFileDialog::ShowDirsOnly);
     int result = dialog.exec();
 
-
-
+    //If the result is true, the path for the directory is stored and it is shown in the prompt.
     if (result){
         dirName = dialog.selectedFiles()[0];
-        ui->label->setText("Directory selected: " + dirName);
+        ui->labelPrompt->setText("Directory selected: " + dirName);
         dirSelected = true;
     }
 
-
 }
 
-void MainWindow::on_pushButton_4_clicked()
+void OMGUI::on_btnLaunch_clicked()
 {
     if (fileSelected == true && dirSelected == true){
-        ui->label->setText("Launching program!!!");
+        ui->labelPrompt->setText("Launching program!!!");
 
         QProcess process;
         process.startDetached("cmd.exe", QStringList() << "/k" << "echo Directory name: "<< dirName << "Files: " << fileNamesSize << "Names: " << fileNamesStr << "\"");
 
         this->close();
     }
+
+    //Tests if the ONI Files and/or the directory have been selected, and warns the user what they need to do prior to launching the program
     else{
         if (fileSelected == true){
-            ui->label->setText("Select a directory first");
+            ui->labelPrompt->setText("Select a directory first");
         } else if (dirSelected == true){
-            ui->label->setText("Load a .ONI file first");
+            ui->labelPrompt->setText("Load a .ONI file first");
         } else{
-            ui->label->setText("Select a directory and load a .ONI file first");
+            ui->labelPrompt->setText("Select a directory and load a .ONI file first");
         }
 
     }
