@@ -1,3 +1,7 @@
+# Directories
+[Dd]ebug/
+[Rr]elease/
+
 # C++ objects and libs
 
 *.slo
