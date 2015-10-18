@@ -69,8 +69,8 @@ void OMGUI::on_btnLaunch_clicked()
     if (fileSelected == true && dirSelected == true){
         ui->labelPrompt->setText("Launching program!!!");
 
-        QProcess process;
-        process.startDetached("cmd.exe", QStringList() << "/k" << "echo Directory name: "<< dirName << "Files: " << fileNamesSize << "Names: " << fileNamesStr << "\"");
+        QProcess* process;
+        process->startDetached("cmd.exe", QStringList() << "/k" << "onimesh" << dirName + "/" << fileNames);
 
         this->close();
     }
