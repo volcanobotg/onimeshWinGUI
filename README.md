@@ -9,4 +9,6 @@ Simply install it.
 
 Open QT and open the project in this repository.
 
+When prompted to configure the project, check the box that says "Desktop QT 5.5.1 MinGW 32bit" and click "Configure Project".
+
 Once you've opened this project using QT, simply build it and run it. The GUI will appear. 
