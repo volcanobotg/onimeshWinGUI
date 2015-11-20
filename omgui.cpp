@@ -10,7 +10,7 @@
 using namespace std;
 
 bool fileSelected, dirSelected;
-QString dirName, fileName;
+QString dirName, fileName, promptText;
 QStringList fileNames;
 QString fileNamesSize, fileNamesStr="";
 
@@ -28,6 +28,8 @@ OMGUI::~OMGUI()
 
 void OMGUI::on_btnSelectFiles_clicked()
 {
+    promptText = "ONI Files(s) are being selected\n";
+    ui->labelPrompt->setText(promptText);
     //Creates the dialog to select different ONI files
     QFileDialog dialog(this);
     fileNames = dialog.getOpenFileNames(this, tr("Select ONI file(s)"), "", tr("ONI Files (*.oni)"));
@@ -49,6 +51,8 @@ void OMGUI::on_btnSelectFiles_clicked()
 
 void OMGUI::on_btnSelectDir_clicked()
 {
+    promptText = "Output location is being selected\n";
+    ui->labelPrompt->setText(promptText);
     //Creates the dialog to select the directory
     QFileDialog dialog;
     dialog.setFileMode(QFileDialog::Directory);
@@ -58,7 +62,8 @@ void OMGUI::on_btnSelectDir_clicked()
     //If the result is true, the path for the directory is stored and it is shown in the prompt.
     if (result){
         dirName = dialog.selectedFiles()[0];
-        ui->labelPrompt->setText("Directory selected: " + dirName);
+        promptText += "Output location has been selected\n";
+        ui->labelPrompt->setText(promptText);
         dirSelected = true;
     }
 
